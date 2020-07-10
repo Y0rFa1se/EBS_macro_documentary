@@ -1,21 +1,30 @@
 #title {
   color: rgb(16, 73, 13);
   text-align: center;
-  font-size: 30px;
+  font-size: 50px;
+  font-family: 'Yeon Sung', cursive;
 }
 
 a {
   color: rgb(21, 98, 168);
+  font-family: 'Yeon Sung', cursive;
+  font-size: 30px;
 }
 
 body {
   text-align: center;
+  font-family: 'Yeon Sung', cursive;
+  font-size: 30px;
 }
 
 ol {
   text-align: left;
+  font-family: 'Yeon Sung', cursive;
+  font-size: 30px;
 }
 
 ul {
   text-align: left;
+  font-family: 'Yeon Sung', cursive;
+  font-size: 30px;
 }
