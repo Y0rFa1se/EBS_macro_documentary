@@ -15,3 +15,8 @@ body {
 ul {
   text-align: left;
 }
+
+.link {
+  font-size: 30px;
+  color: rgb(237, 111, 111);
+}
