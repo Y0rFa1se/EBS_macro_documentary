@@ -2,7 +2,7 @@ function pwcheck(){
   var inputVal = document.getElementById("pw").value;
 
   if (inputVal == "wonsoon0523") {
-    window.location = 'https://drive.google.com/file/d/1nO32ZQnpE-69-pkizbVo-buN2jVI0fYA/view';
+    window.location = 'https://drive.google.com/file/d/1knztAU0Pwz7IO02c_FlGWaMDM1kZznTb/view?usp=sharing';
   } else {
     alert("수준ㅋㅋㅋㅋㅋㅋㅋ");
     alert("그걸틀리네ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ");
