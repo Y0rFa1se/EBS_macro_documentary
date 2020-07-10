@@ -18,112 +18,105 @@
     <br><br><br>
 
     # 웹브라우저<br>
-import webbrowser<br><br>
+    import webbrowser<br><br>
 
-# 지연시간<br>
-import time<br><br>
+    # 지연시간<br>
+    import time<br><br>
 
-#커맨드창 클리어<br>
-import os<br><br>
+    #커맨드창 클리어<br>
+    import os<br><br>
 
-#마우스 조작<br>
-import pyautogui<br><br>
+    #마우스 조작<br>
+    import pyautogui<br><br>
 
-# 재생버튼 찾아서 클릭<br>
-def play():<br>
-    time.sleep(2)<br>
-    loc = pyautogui.locateOnScreen("../IMGs/play.PNG", grayscale = True, confidence = 0.8)<br>
-    if loc == None:<br>
-        loc = pyautogui.locateOnScreen("../IMGs/play2.PNG", grayscale = True, confidence = 0.5)<br><br>
-
+    # 재생버튼 찾아서 클릭<br>
+    def play():<br>
+        time.sleep(5)<br>
+        loc = pyautogui.locateOnScreen("IMGs/play.PNG", confidence = 0.9)<br>
         if loc == None:<br>
-            print("lecture type : youtube")<br>
-            pyautogui.click(1078, 672)<br><br>
-
+            print("play button isn't detected")<br>
+            pyautogui.click(1078, 672)<br>
         else:<br>
-            print("detected play button2 location : ", end="")<br>
+            print("detected play button location : ", end = "")<br>
             print(loc)<br>
-            pyautogui.click(pyautogui.center(loc))<br>
-    else:<br>
-        print("detected play button location : ", end = "")<br>
-        print(loc)<br>
-        pyautogui.click(pyautogui.center(loc))<br><br>
+            pyautogui.click(pyautogui.center(loc))<br><br>
 
-# 남은시간 표시<br>
-def tleft(time_, llecs):<br>
-    lft = int(len(llecs) / 2)<br>
-    for j in range(time_):<br>
-        os.system("cls")<br>
-        print("total time : ", end = "")<br>
-        print(time_, end = "")<br>
-        print(" seconds")<br>
-        print("left time : ", end = "")<br>
-        print(time_ - j, end = "")<br>
-        print(" seconds")<br>
-        print("left lectures : ", end = "")<br>
-        print(lft)<br>
-        time.sleep(1)<br><br>
+    # 남은시간 표시<br>
+    def tleft(time_, llecs):<br>
+        lft = int(len(llecs) / 2)<br>
+        for j in range(time_):<br>
+            os.system("cls")<br>
+            print("total time : ", end = "")<br>
+            print(time_, end = "")<br>
+            print(" seconds")<br>
+            print("left time : ", end = "")<br>
+            print(time_ - j, end = "")<br>
+            print(" seconds")<br>
+            print("left lectures : ", end = "")<br>
+            print(lft)<br>
+            time.sleep(1)<br><br>
 
-# 강의 링크와 시간 설정<br>
-with open("../properties/lectures.ini", "r") as lec:<br>
-    lectures = []<br>
-    lrt = []<br>
+    # 강의 링크와 시간 설정<br>
+    with open("properties/lectures.ini", "r") as lec:<br>
+        lectures = []<br>
+        lrt = []<br>
+        while True:<br>
+            lecs = lec.readline().replace("\n", "")<br>
+            lrntime = lec.readline().replace("\n", "")<br>
+            if lecs == "":<br>
+                break<br>
+            lectures.append(lecs)<br>
+            lrt.append(lrntime)<br>
+        print("lectures : ", end = "")<br>
+        print(lectures)<br>
+        print("time : ", end = "")<br>
+        print(lrt)<br>
+        print()<br><br>
+
+    # 웹페이지 접속 및 로그인<br>
+    webbrowser.open(url = "https://oc.ebssw.kr/")<br><br>
+
     while True:<br>
-        lecs = lec.readline().replace("\n", "")<br>
-        lrntime = lec.readline().replace("\n", "")<br>
-        if lecs == "":<br>
+        if input() == "continue":<br>
             break<br>
-        lectures.append(lecs)<br>
-        lrt.append(lrntime)<br>
-    print("lectures : ", end = "")<br>
-    print(lectures)<br>
-    print("time : ", end = "")<br>
-    print(lrt)<br>
-    print()<br><br>
+        else:<br>
+            pass<br><br>
 
-# 웹페이지 접속 및 로그인<br>
-webbrowser.open(url = "https://oc.ebssw.kr/")<br><br>
+    leccon = lectures * 2<br><br>
 
-while True:<br>
-    if input() == "continue":<br>
-        break<br>
-    else:<br>
-        pass<br>
+    # 실행<br>
+    for culec in range(len(lectures)):<br>
+        webbrowser.open(url = lectures[culec])<br>
+        time.sleep(3)<br>
+        lrtsp = lrt[culec].split(":")<br>
+        min = int(lrtsp[0])<br>
+        sec = lrtsp[1]<br>
+        if sec.find("!") != -1:<br>
+            sec = int(sec.replace("!", ""))<br>
+            slt = int(((min * 60) + sec) * 0.7)<br>
+        else:<br>
+            slt = ((min * 60) + int(sec))<br>
+        print("sleeptime : ", end = "")<br>
+        print(slt)<br>
+        play()<br><br>
 
-leccon = lectures * 2<br><br>
+        tleft(slt, leccon)<br>
+        leccon = []<br><br>
 
-# 실행<br>
-for culec in range(len(lectures)):<br>
-    webbrowser.open(url = lectures[culec])<br>
-    time.sleep(3)<br>
-    lrtsp = lrt[culec].split(":")<br>
-    min = int(lrtsp[0])<br>
-    sec = lrtsp[1]<br>
-    if sec.find("!") != -1:<br>
-        sec = int(sec.replace("!", ""))<br>
-        slt = int(((min * 60) + sec) * 0.7)<br>
-    else:<br>
-        slt = ((min * 60) + int(sec))<br>
-    print("sleeptime : ", end = "")<br>
-    print(slt)<br>
-    play()<br><br>
+        with open("properties/lectures.ini", "r") as lr:<br>
+            leccon = lr.readlines()<br><br>
 
-    tleft(slt, leccon)<br>
-    leccon = []<br><br>
+        with open("properties/lectures.ini", "w") as lw:<br>
+            for h in range(len(leccon)):<br>
+                if h == 0 or h == 1:<br>
+                    continue<br>
+                else:<br>
+                    lw.write(leccon[h])<br><br>
 
-    with open("../properties/lectures.ini", "r") as lr:<br>
-        leccon = lr.readlines()<br><br>
+        leccon = leccon[2:]<br><br>
 
-    with open("../properties/lectures.ini", "w") as lw:<br>
-        for h in range(len(leccon)):<br>
-            if h == 0 or h == 1:<br>
-                continue<br>
-            else:<br>
-                lw.write(leccon[h])<br><br>
+    os.system("pause") <br>
 
-    leccon = leccon[2:]<br><br>
-
-os.system("pause")<br>
 
 
     <br><br>
